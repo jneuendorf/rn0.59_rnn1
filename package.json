@@ -1,0 +1,11 @@
+{
+    "name": "rn0.59_rnn1",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/jneuendorf/rn0.59_rnn1.git",
+    "author": "Jim Neuendorf <jim.neuendorf@gmx.de>",
+    "license": "MIT",
+    "devDependencies": {
+        "react-native-cli": "^2.0.1"
+    }
+}
