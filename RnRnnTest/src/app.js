@@ -4,6 +4,7 @@ import {createStore} from "redux"
 import {Provider} from "react-redux"
 
 import Screen from "./screen"
+import InitialScreen from "./initial_screen"
 import tab_bar_style from "./tab_bar_style"
 
 
@@ -13,30 +14,43 @@ export default class App {
 
     constructor() {
         this.register_components()
-        this.start_tab_based_app()
+        this.start_single_screen_app()
     }
 
     register_components() {
         const components_for_registration = {
-            "screen_a": props => <Screen {...props} text="screen_a" />,
-            "screen_b": props => <Screen {...props} text="screen_b" />,
-            "screen_c": props => <Screen {...props} text="screen_c" />,
-            "screen_d": props => <Screen {...props} text="screen_d" />,
-            "screen_e": props => <Screen {...props} text="screen_e" />,
+            initial_screen: InitialScreen,
+            screen_a: props => <Screen {...props} text="screen_a" />,
+            screen_b: props => <Screen {...props} text="screen_b" />,
+            screen_c: props => <Screen {...props} text="screen_c" />,
+            screen_d: props => <Screen {...props} text="screen_d" />,
+            screen_e: props => <Screen {...props} text="screen_e" />,
         }
         for (const [name, component] of Object.entries(components_for_registration)) {
             console.log("registering", name, __DEV__)
             Navigation.registerComponent(
                 name,
                 () => component,
-                // Those are used to wrap the navigable app.
                 store,
                 Provider,
             )
         }
     }
 
-    start_tab_based_app = () => {
+    start_single_screen_app() {
+        Navigation.startSingleScreenApp({
+            appStyle: {
+                orientation: "portrait",
+            },
+            screen: {screen: "initial_screen"},
+            passProps: {
+                app: this,
+            },
+            animationType: "fade",
+        })
+    }
+
+    start_tab_based_app() {
         Navigation.startTabBasedApp({
             appStyle: {
                 orientation: "portrait",
